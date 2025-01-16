@@ -7,10 +7,6 @@ import img_stage from "@/assets/stage.png";
 
 export default function KofComp() {
   const canvasRef = useRef(null) as any;
-  const [scoreData, setscoreData] = useState({
-    name: "player1",
-    score: 0,
-  });
   let tool = null as any;
   const initCanvas = () => {
     if (!canvasRef.current) return;

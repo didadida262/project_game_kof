@@ -49,7 +49,7 @@
   border: 1px solid orange;
 }
 .markBorderC {
-  border: 1px solid #383B45;
+  border: 1px solid #383b45;
 }
 
 .page-layout {
@@ -57,4 +57,11 @@
   max-width: 1294px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.rotate-y-0 {
+  transform: rotateY(0deg);
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }

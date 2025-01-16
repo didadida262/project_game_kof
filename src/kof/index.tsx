@@ -1,22 +1,27 @@
 import cn from "classnames";
 import paper from "paper";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { drawXY, removeLayer } from "@/utils/paperjsWeapon";
-import img_player from "@/assets/dude.png";
+import { ButtonCommon, EButtonType } from "@/components/ButtonCommon";
+import { drawXY } from "@/utils/paperjsWeapon";
+import Benimarukofxii from "@/assets/Benimarukofxii.gif";
+import fight from "@/assets/audio/three-two-one-fight-deep-voice.mp3";
 import img_stage from "@/assets/stage.png";
+// import img_player from "@/assets/dude.png";
+import Shenwookofxii from "@/assets/Shenwookofxii.gif";
 
 export default function KofComp() {
+  const [startFlag, setStartFlag] = useState(false);
   const canvasRef = useRef(null) as any;
-  let WIDTH = 0;
-  let HEIGHT = 0;
+  // let WIDTH = 0;
+  // let HEIGHT = 0;
   let tool = null as any;
   const initCanvas = () => {
     if (!canvasRef.current) return;
     canvasRef.current.style.cursor = "none";
     paper.setup(canvasRef.current);
-    WIDTH = paper.project.view.bounds.width;
-    HEIGHT = paper.project.view.bounds.height;
+    // WIDTH = paper.project.view.bounds.width;
+    // HEIGHT = paper.project.view.bounds.height;
   };
   const drawPic = () => {
     const raster = new paper.Raster(img_stage);
@@ -58,31 +63,38 @@ export default function KofComp() {
       }
     };
   };
-  const initPlayer = () => {
-    removeLayer(paper.project, "layerRole");
-    const layerXY = new paper.Layer();
-    layerXY.name = "layerRole";
-    const position = new paper.Point(WIDTH / 2, 0.75 * HEIGHT);
-    const raster = new paper.Raster(img_player);
-    raster.onLoad = () => {
-      // 定义裁剪区域（x, y, width, height）
-      // const clipRect = new paper.Rectangle(0, 0, 32, 48); // 替换为您想要裁剪的区域
+  // const initPlayer = () => {
+  //   removeLayer(paper.project, "layerRole");
+  //   const layerXY = new paper.Layer();
+  //   layerXY.name = "layerRole";
+  //   const position = new paper.Point(WIDTH / 2, 0.75 * HEIGHT);
+  //   const raster = new paper.Raster(img_role1);
+  //   raster.onLoad = () => {
+  //     // 定义裁剪区域（x, y, width, height）
+  //     // const clipRect = new paper.Rectangle(0, 0, 32, 48); // 替换为您想要裁剪的区域
 
-      // 使用 clip 方法裁剪图片
-      // raster.clipMask = new paper.Path.Rectangle(clipRect);
-      raster.clipMask = true;
-      raster.position = position;
-      raster.strokeColor = new paper.Color("red");
-      console.log("raster>>>", raster);
-    };
-    // raster.scale(3); // 将图片缩小到原来的50%
+  //     // 使用 clip 方法裁剪图片
+  //     // raster.clipMask = new paper.Path.Rectangle(clipRect);
+  //     raster.clipMask = true;
+  //     raster.position = position;
+  //     raster.strokeColor = new paper.Color("red");
+  //     console.log("raster>>>", raster);
+  //   };
+  //   // raster.scale(3); // 将图片缩小到原来的50%
+  // };
+  const initGame = () => {
+    const audio = new Audio(fight); // 音效文件路径
+    audio.play();
+    setTimeout(() => {
+      setStartFlag(true);
+    }, 4000);
   };
   useEffect(() => {
     window.devicePixelRatio = 1;
     initCanvas();
     drawPic();
     initTool();
-    initPlayer();
+    // initPlayer();
   }, []);
   return (
     <div
@@ -93,6 +105,41 @@ export default function KofComp() {
       )}
     >
       <canvas ref={canvasRef} className="w-full h-full markBorderC" />
+      {startFlag && (
+        <div
+          className={cn(
+            "absolute left-0 bottom-0 w-full h-[calc(50%)]",
+            "flex items-center justify-around",
+          )}
+        >
+          <div className={cn("scale-125")}>
+            <img src={Benimarukofxii}></img>
+          </div>
+
+          <div className={cn("rotate-y-180")}>
+            <img src={Shenwookofxii} style={{ transform: "scale(1.25)" }}></img>
+          </div>
+        </div>
+      )}
+
+      {!startFlag && (
+        <div
+          className={cn(
+            "absolute left-0 bottom-0 w-full h-full",
+            "flex items-center justify-center",
+          )}
+        >
+          <ButtonCommon
+            type={EButtonType.GHOST}
+            className="text-[#FFFFFF]"
+            onClick={() => {
+              initGame();
+            }}
+          >
+            <span className="ml-[8px]">Start Game</span>
+          </ButtonCommon>
+        </div>
+      )}
     </div>
   );
 }

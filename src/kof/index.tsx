@@ -1,6 +1,6 @@
 import cn from "classnames";
 import paper from "paper";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { drawXY, removeLayer } from "@/utils/paperjsWeapon";
 import img_player from "@/assets/dude.png";
@@ -66,7 +66,7 @@ export default function KofComp() {
     const raster = new paper.Raster(img_player);
     raster.onLoad = () => {
       // 定义裁剪区域（x, y, width, height）
-      const clipRect = new paper.Rectangle(0, 0, 32, 48); // 替换为您想要裁剪的区域
+      // const clipRect = new paper.Rectangle(0, 0, 32, 48); // 替换为您想要裁剪的区域
 
       // 使用 clip 方法裁剪图片
       // raster.clipMask = new paper.Path.Rectangle(clipRect);

@@ -112,11 +112,11 @@ export default function KofComp() {
             "flex items-center justify-around",
           )}
         >
-          <div className={cn("scale-125")}>
+          <div className={cn("scale-125 select-none")}>
             <img src={Benimarukofxii}></img>
           </div>
 
-          <div className={cn("rotate-y-180")}>
+          <div className={cn("rotate-y-180 select-none")}>
             <img src={Shenwookofxii} style={{ transform: "scale(1.25)" }}></img>
           </div>
         </div>

@@ -11,7 +11,7 @@ import img_stage from "@/assets/stage.png";
 import Shenwookofxii from "@/assets/Shenwookofxii.gif";
 
 export default function KofComp() {
-  const [startFlag, setStartFlag] = useState(false);
+  const [startFlag, setStartFlag] = useState(true);
   const canvasRef = useRef(null) as any;
   // let WIDTH = 0;
   // let HEIGHT = 0;

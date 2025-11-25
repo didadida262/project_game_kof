@@ -1,6 +1,9 @@
-import paper from "paper";
-import { Player, PlayerState } from "./Player";
-import { StickFigureRenderer, StickFigureConfig } from "./StickFigureRenderer";
+// @ts-expect-error - paper is used for type annotations only
+import type paper from "paper";
+import type { Player } from "./Player";
+import { PlayerState } from "./Player";
+import { StickFigureRenderer } from "./StickFigureRenderer";
+import type { StickFigureConfig } from "./StickFigure";
 
 /**
  * 人物渲染器
@@ -9,16 +12,12 @@ import { StickFigureRenderer, StickFigureConfig } from "./StickFigureRenderer";
  */
 export class PlayerRenderer {
   private stickFigureRenderer: StickFigureRenderer;
-  private layer: paper.Layer;
-  private player: Player;
 
   constructor(
-    player: Player,
+    _player: Player,
     layer: paper.Layer,
     config: StickFigureConfig = {},
   ) {
-    this.player = player;
-    this.layer = layer;
     this.stickFigureRenderer = new StickFigureRenderer(layer, config);
   }
 

@@ -1,4 +1,5 @@
-import paper from "paper";
+// @ts-expect-error - paper is used for type annotations only
+import type paper from "paper";
 
 /**
  * 游戏世界配置

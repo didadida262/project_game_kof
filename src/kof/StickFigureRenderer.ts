@@ -23,7 +23,6 @@ export enum StickFigurePose {
  */
 export class StickFigureRenderer {
   private stickFigure: StickFigure;
-  private layer: paper.Layer;
   private config: Required<StickFigureConfig>;
   private facingRight: boolean = true; // 面向右侧
   private currentPose: StickFigurePose = StickFigurePose.IDLE; // 当前姿态
@@ -42,8 +41,6 @@ export class StickFigureRenderer {
   private walkAnimationTime: number = 0;
 
   constructor(layer: paper.Layer, config: StickFigureConfig = {}) {
-    this.layer = layer;
-
     // 根据视图高度自动计算大小
     const viewHeight = config.viewHeight || 822;
     const autoSize = viewHeight * 0.4; // 从0.28增加到0.4，使身体更大
@@ -102,7 +99,6 @@ export class StickFigureRenderer {
 
       case StickFigurePose.CROUCH:
         // 下蹲：降低身体高度，弯曲膝盖
-        const crouchScale = 0.7; // 身体压缩比例
         const kneeBend = size * 0.15; // 膝盖弯曲距离
 
         // 降低髋部
